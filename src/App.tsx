@@ -7,6 +7,15 @@ import NotFoundPage from './pages/NotFoundPage'
 import { AuthProvider } from './context/AuthContext'
 import ProtectedRoute from './components/auth/ProtectedRoute'
 import TicketsPage from './pages/TicketsPage'
+import AppLayout from './components/layout/AppLayout'
+
+function ProtectedLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <ProtectedRoute>
+      <AppLayout>{children}</AppLayout>
+    </ProtectedRoute>
+  )
+}
 
 function App() {
   return (
@@ -17,33 +26,33 @@ function App() {
           <Route
             path="/tickets"
             element={
-              <ProtectedRoute>
+              <ProtectedLayout>
                 <TicketsPage />
-              </ProtectedRoute>
+              </ProtectedLayout>
             }
           />
           <Route
             path="/tickets/new"
             element={
-              <ProtectedRoute>
+              <ProtectedLayout>
                 <NewTicketPage />
-              </ProtectedRoute>
+              </ProtectedLayout>
             }
           />
           <Route
             path="/tickets/:id"
             element={
-              <ProtectedRoute>
+              <ProtectedLayout>
                 <TicketDetailPage />
-              </ProtectedRoute>
+              </ProtectedLayout>
             }
           />
           <Route
             path="/tickets/:id:edit"
             element={
-              <ProtectedRoute>
+              <ProtectedLayout>
                 <EditTicketPage />
-              </ProtectedRoute>
+              </ProtectedLayout>
             }
           />
           <Route path="/" element={<Navigate to="/tickets" replace />} />

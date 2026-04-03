@@ -1,13 +1,330 @@
-*, *::before, *::after {
+/* ─── ПЕРЕМЕННЫЕ ─────────────────────────────── */
+:root {
+  /* Цвета поверхностей */
+  --color-bg: #f9fafb;
+  --color-surface: #ffffff;
+  --color-surface-2: #f3f4f6;
+  --color-border: #e5e7eb;
+  --color-border-strong: #d1d5db;
+
+  /* Текст */
+  --color-text: #111827;
+  --color-text-muted: #6b7280;
+  --color-text-faint: #9ca3af;
+
+  /* Акцентный цвет (teal) */
+  --color-primary: #0d9488;
+  --color-primary-hover: #0f766e;
+  --color-primary-light: #f0fdfa;
+
+  /* Статусы */
+  --color-status-new-bg: #eff6ff;
+  --color-status-new-text: #1d4ed8;
+  --color-status-in-progress-bg: #fffbeb;
+  --color-status-in-progress-text: #b45309;
+  --color-status-waiting-bg: #f3f4f6;
+  --color-status-waiting-text: #374151;
+  --color-status-resolved-bg: #f0fdf4;
+  --color-status-resolved-text: #166534;
+  --color-status-closed-bg: #f9fafb;
+  --color-status-closed-text: #6b7280;
+  --color-status-cancelled-bg: #fef2f2;
+  --color-status-cancelled-text: #b91c1c;
+
+  /* Приоритеты */
+  --color-priority-low-bg: #f3f4f6;
+  --color-priority-low-text: #374151;
+  --color-priority-medium-bg: #fffbeb;
+  --color-priority-medium-text: #b45309;
+  --color-priority-high-bg: #fff7ed;
+  --color-priority-high-text: #c2410c;
+  --color-priority-critical-bg: #fef2f2;
+  --color-priority-critical-text: #b91c1c;
+
+  /* Семантические цвета */
+  --color-success: #16a34a;
+  --color-error: #dc2626;
+  --color-error-bg: #fef2f2;
+  --color-warning: #d97706;
+
+  /* Отступы */
+  --space-1: 0.25rem; /* 4px */
+  --space-2: 0.5rem; /* 8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px */
+  --space-5: 1.25rem; /* 20px */
+  --space-6: 1.5rem; /* 24px */
+  --space-8: 2rem; /* 32px */
+  --space-10: 2.5rem; /* 40px */
+  --space-12: 3rem; /* 48px */
+
+  /* Радиусы */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-full: 9999px;
+
+  /* Тени */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07);
+
+  /* Шрифты */
+  --font-body: Inter, system-ui, -apple-system, sans-serif;
+
+  /* Переходы */
+  --transition: 150ms ease;
+}
+
+/* ─── СБРОС ───────────────────────────────────── */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
 body {
-  font-family: Inter, system-ui, sans-serif;
+  font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.5;
-  color: #a4aab8;
-  background-color: #0e1b27;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ─── ФОКУС ───────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ─── BUTTON ─────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  transition:
+    background-color var(--transition),
+    color var(--transition),
+    border-color var(--transition);
+  white-space: nowrap;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Размеры */
+.btn--sm {
+  padding: var(--space-1) var(--space-3);
+  font-size: 0.875rem;
+}
+
+.btn--md {
+  padding: var(--space-2) var(--space-4);
+  font-size: 0.9375rem;
+}
+
+/* Варианты */
+.btn--primary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+.btn--primary:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+}
+
+.btn--secondary {
+  background-color: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-border-strong);
+}
+.btn--secondary:hover:not(:disabled) {
+  background-color: var(--color-surface-2);
+}
+
+.btn--danger {
+  background-color: transparent;
+  color: var(--color-error);
+  border: 1px solid var(--color-border-strong);
+}
+.btn--danger:hover:not(:disabled) {
+  background-color: var(--color-error-bg);
+  border-color: var(--color-error);
+}
+
+.btn--ghost {
+  background-color: transparent;
+  color: var(--color-text-muted);
+}
+.btn--ghost:hover:not(:disabled) {
+  background-color: var(--color-surface-2);
+  color: var(--color-text);
+}
+
+/* ─── BADGE ──────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Статусы */
+.badge--status-new {
+  background-color: var(--color-status-new-bg);
+  color: var(--color-status-new-text);
+}
+.badge--status-in-progress {
+  background-color: var(--color-status-in-progress-bg);
+  color: var(--color-status-in-progress-text);
+}
+.badge--status-waiting {
+  background-color: var(--color-status-waiting-bg);
+  color: var(--color-status-waiting-text);
+}
+.badge--status-resolved {
+  background-color: var(--color-status-resolved-bg);
+  color: var(--color-status-resolved-text);
+}
+.badge--status-closed {
+  background-color: var(--color-status-closed-bg);
+  color: var(--color-status-closed-text);
+}
+.badge--status-cancelled {
+  background-color: var(--color-status-cancelled-bg);
+  color: var(--color-status-cancelled-text);
+}
+
+/* Приоритеты */
+.badge--priority-low {
+  background-color: var(--color-priority-low-bg);
+  color: var(--color-priority-low-text);
+}
+.badge--priority-medium {
+  background-color: var(--color-priority-medium-bg);
+  color: var(--color-priority-medium-text);
+}
+.badge--priority-high {
+  background-color: var(--color-priority-high-bg);
+  color: var(--color-priority-high-text);
+}
+.badge--priority-critical {
+  background-color: var(--color-priority-critical-bg);
+  color: var(--color-priority-critical-text);
+}
+/* ─── SPINNER ────────────────────────────────── */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  animation: spin 0.6s linear infinite;
+  flex-shrink: 0;
+}
+
+.spinner--sm {
+  width: 16px;
+  height: 16px;
+}
+.spinner--md {
+  width: 24px;
+  height: 24px;
+}
+.spinner--lg {
+  width: 36px;
+  height: 36px;
+}
+/* ─── LAYOUT ─────────────────────────────────── */
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-main {
+  flex: 1;
+  padding: var(--space-6) var(--space-8);
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ─── HEADER ─────────────────────────────────── */
+.header {
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-8);
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+.header__logo-icon {
+  font-size: 1.25rem;
+  color: var(--color-primary);
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.header__user {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
 }

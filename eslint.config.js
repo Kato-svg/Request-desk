@@ -20,4 +20,6 @@ export default defineConfig([
       globals: globals.browser,
     },
   },
+
+  'no-unused-vars': ['error', { varsIgnorePattern: '^_' }],
 ])

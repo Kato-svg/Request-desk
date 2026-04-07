@@ -278,6 +278,69 @@
       "text": "d",
       "created_at": "2026-04-07T13:20:47.183Z",
       "id": "J7vDUyb4wxw"
+    },
+    {
+      "ticket_id": 2,
+      "author_id": 1,
+      "text": "ву",
+      "created_at": "2026-04-07T14:16:36.700Z",
+      "id": "s62RhtTaOZo"
+    },
+    {
+      "ticket_id": 1,
+      "author_id": 1,
+      "text": "ED",
+      "created_at": "2026-04-07T15:07:55.196Z",
+      "id": "4lUWpQ-ti10"
+    },
+    {
+      "ticket_id": 2,
+      "author_id": 1,
+      "text": "я",
+      "created_at": "2026-04-07T15:17:14.601Z",
+      "id": "YWfI4goJz80"
+    },
+    {
+      "ticket_id": 2,
+      "author_id": 1,
+      "text": "ыцыцыц",
+      "created_at": "2026-04-07T15:33:23.707Z",
+      "id": "9xay_jzkgf8"
+    },
+    {
+      "ticket_id": 2,
+      "author_id": 1,
+      "text": "d",
+      "created_at": "2026-04-07T15:39:59.548Z",
+      "id": "SnVzoPUYPfo"
+    },
+    {
+      "ticket_id": 2,
+      "author_id": 1,
+      "text": "\"\"",
+      "created_at": "2026-04-07T15:40:25.858Z",
+      "id": "FwcJ_Sp_bto"
+    },
+    {
+      "ticket_id": 2,
+      "author_id": 1,
+      "text": "\"     \"",
+      "created_at": "2026-04-07T15:40:31.939Z",
+      "id": "o540ievQpFk"
+    },
+    {
+      "ticket_id": 2,
+      "author_id": 1,
+      "text": "Э",
+      "created_at": "2026-04-07T15:42:01.832Z",
+      "id": "askESDKYIME"
+    },
+    {
+      "ticket_id": 2,
+      "author_id": 1,
+      "text": "\"               \"",
+      "created_at": "2026-04-07T15:43:25.735Z",
+      "id": "U68lnwRNPNY"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

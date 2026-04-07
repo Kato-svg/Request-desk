@@ -16,13 +16,23 @@ type UseTicketDetailResult = {
   addComment: (text: string, authorId: number) => Promise<void>
 }
 
-export function useTicketDetail(id: number): UseTicketDetailResult {
+export function useTicketDetail(id: number | null): UseTicketDetailResult {
   const [ticket, setTicket] = useState<Ticket | null>(null)
   const [comments, setComments] = useState<Comment[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
+    if (id === null) {
+      setTicket(null)
+      setComments([])
+      setLoading(false)
+      setError('Некорректный ID заявки')
+      return
+    }
+
+    const safeId = id
+
     let cancelled = false
 
     async function load() {
@@ -31,8 +41,8 @@ export function useTicketDetail(id: number): UseTicketDetailResult {
         setError(null)
 
         const [ticketData, commentsData] = await Promise.all([
-          fetchTicketById(id),
-          fetchCommentsByTicketId(id),
+          fetchTicketById(safeId),
+          fetchCommentsByTicketId(safeId),
         ])
 
         if (!cancelled) {
@@ -49,6 +59,7 @@ export function useTicketDetail(id: number): UseTicketDetailResult {
     }
 
     load()
+
     return () => {
       cancelled = true
     }
@@ -69,6 +80,8 @@ export function useTicketDetail(id: number): UseTicketDetailResult {
   }
 
   async function addComment(text: string, authorId: number) {
+    if (id === null) return
+
     try {
       const newComment = await createComment({
         ticket_id: id,
@@ -79,6 +92,7 @@ export function useTicketDetail(id: number): UseTicketDetailResult {
       setComments((prev) => [...prev, newComment])
     } catch (err) {
       console.error('Ошибка создания комментария', err)
+      throw err
     }
   }
 

@@ -7,8 +7,8 @@ import Button from '../components/ui/Button'
 import Spinner from '../components/ui/Spinner'
 import StatusActions from '../components/tickets/StatusActions'
 import { formatDate, isSlaOverdue } from '../utils/formatDate'
+import { MOCK_USERS } from '../data/users'
 
-// Метки каналов
 const CHANNEL_LABELS: Record<string, string> = {
   web: '🌐 Сайт',
   email: '✉️ Email',
@@ -21,15 +21,11 @@ function TicketDetailPage() {
   const navigate = useNavigate()
   const { currentUser } = useAuth()
 
-  const ticketId = Number(id)
-  const { ticket, comments, loading, error, changeStatus, addComment } =
-    useTicketDetail(ticketId)
+  const parsedTicketId = id ? Number(id) : null
+  const isInvalidTicketId =
+    parsedTicketId === null || Number.isNaN(parsedTicketId)
 
-  // Состояние формы комментария
-  const [commentText, setCommentText] = useState('')
-  const [commentLoading, setCommentLoading] = useState(false)
-
-  if (!id || isNaN(ticketId)) {
+  if (isInvalidTicketId) {
     return (
       <div className="error-state">
         <p>Некорректный ID заявки</p>
@@ -38,27 +34,39 @@ function TicketDetailPage() {
     )
   }
 
-  // ─── Обработчик добавления комментария ────────
+  const { ticket, comments, loading, error, changeStatus, addComment } =
+    useTicketDetail(parsedTicketId)
+
+  const [commentText, setCommentText] = useState('')
+  const [commentLoading, setCommentLoading] = useState(false)
+  const [commentError, setCommentError] = useState<string | null>(null)
+
   async function handleAddComment(e: React.FormEvent) {
     e.preventDefault()
-    if (!commentText.trim() || !currentUser) return
+
+    const trimmedComment = commentText.trim()
+    setCommentError(null)
+
+    if (!trimmedComment) {
+      setCommentError('Введите текст комментария')
+      return
+    }
+
+    if (!currentUser) {
+      setCommentError('Пользователь не авторизован')
+      return
+    }
 
     setCommentLoading(true)
+
     try {
-      await addComment(commentText.trim(), currentUser.id)
-      setCommentText('') // очищаем поле после успеха
+      await addComment(trimmedComment, currentUser.id)
+      setCommentText('')
+    } catch {
+      setCommentError('Не удалось добавить комментарий. Попробуйте ещё раз.')
     } finally {
       setCommentLoading(false)
     }
-  }
-
-  // ─── Состояния ────────────────────────────────
-  if (loading) {
-    return (
-      <div className="detail-loading">
-        <Spinner size="lg" />
-      </div>
-    )
   }
 
   if (error) {
@@ -70,6 +78,14 @@ function TicketDetailPage() {
         <Button variant="secondary" onClick={() => navigate('/tickets')}>
           ← Вернуться к списку
         </Button>
+      </div>
+    )
+  }
+
+  if (loading) {
+    return (
+      <div className="detail-loading">
+        <Spinner size="lg" />
       </div>
     )
   }
@@ -87,19 +103,23 @@ function TicketDetailPage() {
 
   const overdue = isSlaOverdue(ticket.sla_deadline)
 
+  function getUserName(userId: number) {
+    const user = MOCK_USERS.find((u) => u.id === userId)
+    return user ? user.name : `Сотрудник #${userId}`
+  }
+
   return (
     <div className="detail-page">
-      {/* Навигация назад */}
       <button className="back-link" onClick={() => navigate('/tickets')}>
         ← Все заявки
       </button>
 
-      {/* Заголовок */}
       <div className="detail-header">
         <div className="detail-header__left">
           <span className="detail-id">#{ticket.id}</span>
           <h1 className="detail-title">{ticket.subject}</h1>
         </div>
+
         <Button
           variant="secondary"
           onClick={() => navigate(`/tickets/${ticket.id}/edit`)}
@@ -109,15 +129,12 @@ function TicketDetailPage() {
       </div>
 
       <div className="detail-grid">
-        {/* Левая колонка — основная информация */}
         <div className="detail-main">
-          {/* Описание */}
           <section className="detail-card">
             <h2 className="detail-card__title">Описание</h2>
             <p className="detail-description">{ticket.description}</p>
           </section>
 
-          {/* Смена статуса */}
           <section className="detail-card">
             <h2 className="detail-card__title">Сменить статус</h2>
             <StatusActions
@@ -126,7 +143,6 @@ function TicketDetailPage() {
             />
           </section>
 
-          {/* Комментарии */}
           <section className="detail-card">
             <h2 className="detail-card__title">
               Комментарии {comments.length > 0 && `(${comments.length})`}
@@ -140,7 +156,7 @@ function TicketDetailPage() {
                   <li key={comment.id} className="comment">
                     <div className="comment__meta">
                       <span className="comment__author">
-                        Сотрудник #{comment.author_id}
+                        {getUserName(comment.author_id)}
                       </span>
                       <span className="comment__date">
                         {formatDate(comment.created_at)}
@@ -152,7 +168,6 @@ function TicketDetailPage() {
               </ul>
             )}
 
-            {/* Форма комментария */}
             <form onSubmit={handleAddComment} className="comment-form">
               <textarea
                 className="comment-textarea"
@@ -162,6 +177,8 @@ function TicketDetailPage() {
                 rows={3}
                 disabled={commentLoading}
               />
+              {commentError && <p className="form-error">{commentError}</p>}
+
               <Button
                 type="submit"
                 variant="primary"
@@ -174,7 +191,6 @@ function TicketDetailPage() {
           </section>
         </div>
 
-        {/* Правая колонка — метаданные */}
         <aside className="detail-sidebar">
           <div className="detail-card">
             <dl className="detail-meta">
@@ -184,16 +200,19 @@ function TicketDetailPage() {
                   <Badge type="status" value={ticket.status} />
                 </dd>
               </div>
+
               <div className="detail-meta__row">
                 <dt>Приоритет</dt>
                 <dd>
                   <Badge type="priority" value={ticket.priority} />
                 </dd>
               </div>
+
               <div className="detail-meta__row">
                 <dt>Канал</dt>
                 <dd>{CHANNEL_LABELS[ticket.channel] ?? ticket.channel}</dd>
               </div>
+
               <div className="detail-meta__row">
                 <dt>SLA</dt>
                 <dd className={overdue ? 'text-error' : ''}>
@@ -201,10 +220,12 @@ function TicketDetailPage() {
                   {overdue && <span className="sla-badge">Просрочено</span>}
                 </dd>
               </div>
+
               <div className="detail-meta__row">
                 <dt>Создана</dt>
                 <dd>{formatDate(ticket.created_at)}</dd>
               </div>
+
               <div className="detail-meta__row">
                 <dt>Обновлена</dt>
                 <dd>{formatDate(ticket.updated_at)}</dd>
@@ -219,10 +240,12 @@ function TicketDetailPage() {
                 <dt>Имя</dt>
                 <dd>{ticket.client.name}</dd>
               </div>
+
               <div className="detail-meta__row">
                 <dt>Email</dt>
                 <dd>{ticket.client.email}</dd>
               </div>
+
               {ticket.client.phone && (
                 <div className="detail-meta__row">
                   <dt>Телефон</dt>

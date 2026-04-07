@@ -60,7 +60,7 @@
       "id": "3",
       "subject": "Ошибка при загрузке фото в профиль",
       "description": "При попытке загрузить аватар в личном кабинете появляется ошибка «Неподдерживаемый формат файла». Файл в формате JPG, размер 2 МБ.",
-      "status": "in_progress",
+      "status": "cancelled",
       "priority": "medium",
       "channel": "web",
       "client": {
@@ -70,14 +70,14 @@
       },
       "assignee_id": 2,
       "created_at": "2026-03-30T11:00:00.000Z",
-      "updated_at": "2026-04-05T15:55:09.816Z",
+      "updated_at": "2026-04-07T16:08:39.225Z",
       "sla_deadline": "2026-04-03T18:00:00.000Z"
     },
     {
       "id": "4",
       "subject": "Как изменить адрес доставки после оформления?",
       "description": "Оформил заказ, но указал старый адрес доставки. Заказ ещё не передан в курьерскую службу. Можно ли изменить адрес?",
-      "status": "resolved",
+      "status": "cancelled",
       "priority": "low",
       "channel": "phone",
       "client": {
@@ -86,14 +86,14 @@
       },
       "assignee_id": 3,
       "created_at": "2026-03-31T16:45:00.000Z",
-      "updated_at": "2026-04-01T12:00:00.000Z",
+      "updated_at": "2026-04-07T16:18:59.535Z",
       "sla_deadline": "2026-04-02T12:00:00.000Z"
     },
     {
       "id": "5",
       "subject": "Задвоение позиций в корзине",
       "description": "При добавлении товара в корзину он иногда добавляется дважды. Воспроизводится непостоянно, примерно 1 раз из 5. Браузер Firefox 122.",
-      "status": "in_progress",
+      "status": "resolved",
       "priority": "high",
       "channel": "web",
       "client": {
@@ -103,7 +103,7 @@
       },
       "assignee_id": 2,
       "created_at": "2026-04-01T08:20:00.000Z",
-      "updated_at": "2026-04-01T08:20:00.000Z",
+      "updated_at": "2026-04-07T16:16:32.574Z",
       "sla_deadline": "2026-04-04T18:00:00.000Z"
     },
     {
@@ -143,7 +143,7 @@
       "id": "8",
       "subject": "Сайт не открывается на мобильном",
       "description": "С телефона Samsung Galaxy S23 сайт не загружается — белый экран. С компьютера всё работает нормально. Браузер Chrome на Android.",
-      "status": "new",
+      "status": "cancelled",
       "priority": "high",
       "channel": "chat",
       "client": {
@@ -152,7 +152,7 @@
       },
       "assignee_id": 2,
       "created_at": "2026-04-02T11:30:00.000Z",
-      "updated_at": "2026-04-02T11:30:00.000Z",
+      "updated_at": "2026-04-07T16:08:42.103Z",
       "sla_deadline": "2026-04-04T12:00:00.000Z"
     },
     {
@@ -192,7 +192,7 @@
       "id": "11",
       "subject": "Приложение вылетает при открытии раздела «Избранное»",
       "description": "Мобильное приложение iOS падает каждый раз при попытке открыть раздел «Избранное». Версия приложения 3.2.1, iOS 17.3.",
-      "status": "new",
+      "status": "cancelled",
       "priority": "critical",
       "channel": "chat",
       "client": {
@@ -202,7 +202,7 @@
       },
       "assignee_id": 2,
       "created_at": "2026-04-02T13:00:00.000Z",
-      "updated_at": "2026-04-02T13:00:00.000Z",
+      "updated_at": "2026-04-07T16:07:44.017Z",
       "sla_deadline": "2026-04-03T12:00:00.000Z"
     },
     {
@@ -341,6 +341,13 @@
       "text": "\"               \"",
       "created_at": "2026-04-07T15:43:25.735Z",
       "id": "U68lnwRNPNY"
+    },
+    {
+      "ticket_id": 8,
+      "author_id": 1,
+      "text": "ч",
+      "created_at": "2026-04-07T16:24:33.321Z",
+      "id": "U5L2HLe-g40"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

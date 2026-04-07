@@ -8,6 +8,7 @@ import Spinner from '../components/ui/Spinner'
 import StatusActions from '../components/tickets/StatusActions'
 import { formatDate, isSlaOverdue } from '../utils/formatDate'
 import { MOCK_USERS } from '../data/users'
+import type { Ticket } from '../types'
 
 const CHANNEL_LABELS: Record<string, string> = {
   web: '🌐 Сайт',
@@ -39,6 +40,8 @@ function TicketDetailPage() {
 
   const [commentText, setCommentText] = useState('')
   const [commentLoading, setCommentLoading] = useState(false)
+  const [statusLoading, setStatusLoading] = useState(false)
+  const [statusError, setStatusError] = useState<string | null>(null)
   const [commentError, setCommentError] = useState<string | null>(null)
 
   async function handleAddComment(e: React.FormEvent) {
@@ -101,11 +104,29 @@ function TicketDetailPage() {
     )
   }
 
+  async function handleChangeStatus(newStatus: Ticket['status']) {
+    setStatusError(null)
+    setStatusLoading(true)
+
+    try {
+      await changeStatus(newStatus)
+    } catch {
+      setStatusError('Не удалось обновить статус. Попробуйте ещё раз.')
+    } finally {
+      setStatusLoading(false)
+    }
+  }
+
   const overdue = isSlaOverdue(ticket.sla_deadline)
 
   function getUserName(userId: number) {
     const user = MOCK_USERS.find((u) => u.id === userId)
     return user ? user.name : `Сотрудник #${userId}`
+  }
+
+  function getAssigneeName(userId: number) {
+    const user = MOCK_USERS.find((u) => u.id === userId)
+    return user ? user.name : 'Не назначен'
   }
 
   return (
@@ -139,15 +160,16 @@ function TicketDetailPage() {
             <h2 className="detail-card__title">Сменить статус</h2>
             <StatusActions
               currentStatus={ticket.status}
-              onChangeStatus={changeStatus}
+              onChangeStatus={handleChangeStatus}
+              disabled={statusLoading}
             />
+            {statusError && <p className="form-error">{statusError}</p>}
           </section>
 
           <section className="detail-card">
             <h2 className="detail-card__title">
               Комментарии {comments.length > 0 && `(${comments.length})`}
             </h2>
-
             {comments.length === 0 ? (
               <p className="comments-empty">Комментариев пока нет</p>
             ) : (
@@ -159,7 +181,7 @@ function TicketDetailPage() {
                         {getUserName(comment.author_id)}
                       </span>
                       <span className="comment__date">
-                        {formatDate(comment.created_at)}
+                        {formatDate(comment.created_at, { withTime: true })}
                       </span>
                     </div>
                     <p className="comment__text">{comment.text}</p>
@@ -194,6 +216,10 @@ function TicketDetailPage() {
         <aside className="detail-sidebar">
           <div className="detail-card">
             <dl className="detail-meta">
+              <div className="detail-meta__row">
+                <dt>Ответственный</dt>
+                <dd>{getAssigneeName(ticket.assignee_id)}</dd>
+              </div>
               <div className="detail-meta__row">
                 <dt>Статус</dt>
                 <dd>

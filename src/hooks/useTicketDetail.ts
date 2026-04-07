@@ -76,6 +76,7 @@ export function useTicketDetail(id: number | null): UseTicketDetailResult {
       setTicket(updated)
     } catch (err) {
       console.error('Ошибка смены статуса', err)
+      throw err
     }
   }
 

@@ -1,4 +1,4 @@
-import type { Ticket } from '../../types'
+import type { Ticket, TicketStatus } from '../../types'
 import Button from '../ui/Button'
 
 // Какие переходы разрешены из каждого статуса
@@ -21,8 +21,8 @@ const STATUS_LABELS: Record<Ticket['status'], string> = {
 }
 
 type StatusActionsProps = {
-  currentStatus: Ticket['status']
-  onChangeStatus: (status: Ticket['status']) => Promise<void>
+  currentStatus: TicketStatus
+  onChangeStatus: (status: TicketStatus) => Promise<void>
   disabled?: boolean
 }
 

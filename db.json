@@ -44,7 +44,7 @@
       "id": "2",
       "subject": "Не приходит письмо с подтверждением заказа",
       "description": "Оформил заказ №4521 вчера вечером, письмо на почту так и не пришло. Проверил спам — письма нет. Email указан верно: customer@mail.ru",
-      "status": "in_progress",
+      "status": "cancelled",
       "priority": "high",
       "channel": "email",
       "client": {
@@ -53,14 +53,14 @@
       },
       "assignee_id": 1,
       "created_at": "2026-03-29T14:30:00.000Z",
-      "updated_at": "2026-03-30T10:00:00.000Z",
+      "updated_at": "2026-04-07T13:20:50.775Z",
       "sla_deadline": "2026-03-31T18:00:00.000Z"
     },
     {
       "id": "3",
       "subject": "Ошибка при загрузке фото в профиль",
       "description": "При попытке загрузить аватар в личном кабинете появляется ошибка «Неподдерживаемый формат файла». Файл в формате JPG, размер 2 МБ.",
-      "status": "waiting",
+      "status": "in_progress",
       "priority": "medium",
       "channel": "web",
       "client": {
@@ -70,7 +70,7 @@
       },
       "assignee_id": 2,
       "created_at": "2026-03-30T11:00:00.000Z",
-      "updated_at": "2026-04-01T09:00:00.000Z",
+      "updated_at": "2026-04-05T15:55:09.816Z",
       "sla_deadline": "2026-04-03T18:00:00.000Z"
     },
     {
@@ -264,6 +264,20 @@
       "text": "у",
       "created_at": "2026-04-05T14:30:13.977Z",
       "id": "ypTAuaq4deI"
+    },
+    {
+      "ticket_id": 3,
+      "author_id": 1,
+      "text": "в работе",
+      "created_at": "2026-04-05T15:54:52.660Z",
+      "id": "iWzAwM0EEz8"
+    },
+    {
+      "ticket_id": 2,
+      "author_id": 1,
+      "text": "d",
+      "created_at": "2026-04-07T13:20:47.183Z",
+      "id": "J7vDUyb4wxw"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

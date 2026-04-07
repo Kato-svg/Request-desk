@@ -48,7 +48,7 @@ function App() {
             }
           />
           <Route
-            path="/tickets/:id:edit"
+            path="/tickets/:id/edit"
             element={
               <ProtectedLayout>
                 <EditTicketPage />

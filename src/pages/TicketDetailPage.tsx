@@ -29,6 +29,15 @@ function TicketDetailPage() {
   const [commentText, setCommentText] = useState('')
   const [commentLoading, setCommentLoading] = useState(false)
 
+  if (!id || isNaN(ticketId)) {
+    return (
+      <div className="error-state">
+        <p>Некорректный ID заявки</p>
+        <Button onClick={() => navigate('/tickets')}>← Назад</Button>
+      </div>
+    )
+  }
+
   // ─── Обработчик добавления комментария ────────
   async function handleAddComment(e: React.FormEvent) {
     e.preventDefault()
@@ -65,7 +74,16 @@ function TicketDetailPage() {
     )
   }
 
-  if (!ticket) return null
+  if (!ticket) {
+    return (
+      <div className="error-state">
+        <p>Заявка не найдена</p>
+        <Button onClick={() => navigate('/tickets')}>
+          ← Вернуться к списку
+        </Button>
+      </div>
+    )
+  }
 
   const overdue = isSlaOverdue(ticket.sla_deadline)
 

@@ -54,25 +54,32 @@ export function useTicketDetail(id: number): UseTicketDetailResult {
     }
   }, [id])
 
-  // Сменить статус заявки
   async function changeStatus(status: Ticket['status']) {
     if (!ticket) return
 
-    const updated = await updateTicket(ticket.id, {
-      status,
-      updated_at: new Date().toISOString(),
-    })
-    setTicket(updated)
+    try {
+      const updated = await updateTicket(ticket.id, {
+        status,
+        updated_at: new Date().toISOString(),
+      })
+      setTicket(updated)
+    } catch (err) {
+      console.error('Ошибка смены статуса', err)
+    }
   }
 
   async function addComment(text: string, authorId: number) {
-    const newComment = await createComment({
-      ticket_id: id,
-      author_id: authorId,
-      text,
-      created_at: new Date().toISOString(),
-    })
-    setComments((prev) => [...prev, newComment])
+    try {
+      const newComment = await createComment({
+        ticket_id: id,
+        author_id: authorId,
+        text,
+        created_at: new Date().toISOString(),
+      })
+      setComments((prev) => [...prev, newComment])
+    } catch (err) {
+      console.error('Ошибка создания комментария', err)
+    }
   }
 
   return { ticket, comments, loading, error, changeStatus, addComment }

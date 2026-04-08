@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 import Input from '../components/ui/Input'
 import Button from '../components/ui/Button'
+import styles from './LoginPage.module.css'
 
 type FormErrors = {
   email?: string
@@ -58,14 +59,14 @@ function LoginPage() {
   }
 
   return (
-    <div className="login-page">
-      <div className="login-card">
-        <div className="login-header">
-          <span className="login-logo-icon">⬡</span>
-          <h1 className="login-title">RequestDesk</h1>
+    <div className={styles.loginPage}>
+      <div className={styles.loginCard}>
+        <div className={styles.loginHeader}>
+          <span className={styles.loginLogoIcon}>⬡</span>
+          <h1 className={styles.loginTitle}>RequestDesk</h1>
         </div>
 
-        <form onSubmit={handleSubmit} noValidate className="login-form">
+        <form onSubmit={handleSubmit} noValidate className={styles.loginForm}>
           <Input
             label="Email"
             type="email"
@@ -86,16 +87,20 @@ function LoginPage() {
             autoComplete="current-password"
           />
           {authError && (
-            <div className="login-auth-error" role="alert">
+            <div className={styles.loginAuthError} role="alert">
               {authError}
             </div>
           )}
 
-          <Button type="submit" variant="primary" className="login-submit">
+          <Button
+            type="submit"
+            variant="primary"
+            className={styles.loginSubmit}
+          >
             Войти
           </Button>
         </form>
-        <div className="login-hint">
+        <div className={styles.loginHint}>
           <p>Тестовый вход:</p>
           <p>maria@requestdesk.ru / password123</p>
         </div>

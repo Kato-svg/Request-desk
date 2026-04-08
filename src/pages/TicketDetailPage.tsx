@@ -9,6 +9,7 @@ import StatusActions from '../components/tickets/StatusActions'
 import { formatDate, isSlaOverdue } from '../utils/formatDate'
 import { MOCK_USERS } from '../data/users'
 import type { Ticket } from '../types'
+import styles from './TicketDetailPage.module.css'
 
 const CHANNEL_LABELS: Record<string, string> = {
   web: '🌐 Сайт',
@@ -87,7 +88,7 @@ function TicketDetailPage() {
 
   if (loading) {
     return (
-      <div className="detail-loading">
+      <div className={styles.detailLoading}>
         <Spinner size="lg" />
       </div>
     )
@@ -126,15 +127,15 @@ function TicketDetailPage() {
   }
 
   return (
-    <div className="detail-page">
-      <button className="back-link" onClick={() => navigate('/tickets')}>
+    <div>
+      <button className={styles.backLink} onClick={() => navigate('/tickets')}>
         ← Все заявки
       </button>
 
-      <div className="detail-header">
-        <div className="detail-header__left">
-          <span className="detail-id">#{ticket.id}</span>
-          <h1 className="detail-title">{ticket.subject}</h1>
+      <div className={styles.detailHeader}>
+        <div className={styles.detailHeaderLeft}>
+          <span className={styles.detailId}>#{ticket.id}</span>
+          <h1 className={styles.detailTitle}>{ticket.subject}</h1>
         </div>
 
         <Button
@@ -145,15 +146,15 @@ function TicketDetailPage() {
         </Button>
       </div>
 
-      <div className="detail-grid">
-        <div className="detail-main">
-          <section className="detail-card">
-            <h2 className="detail-card__title">Описание</h2>
-            <p className="detail-description">{ticket.description}</p>
+      <div className={styles.detailGrid}>
+        <div className={styles.detailMain}>
+          <section className={styles.detailCard}>
+            <h2 className={styles.detailCardTitle}>Описание</h2>
+            <p className={styles.detailDescription}>{ticket.description}</p>
           </section>
 
-          <section className="detail-card">
-            <h2 className="detail-card__title">Сменить статус</h2>
+          <section className={styles.detailCard}>
+            <h2 className={styles.detailCardTitle}>Сменить статус</h2>
             <StatusActions
               currentStatus={ticket.status}
               onChangeStatus={handleChangeStatus}
@@ -162,33 +163,33 @@ function TicketDetailPage() {
             {statusError && <p className="form-error">{statusError}</p>}
           </section>
 
-          <section className="detail-card">
-            <h2 className="detail-card__title">
+          <section className={styles.detailCard}>
+            <h2 className={styles.detailCardTitle}>
               Комментарии {comments.length > 0 && `(${comments.length})`}
             </h2>
             {comments.length === 0 ? (
-              <p className="comments-empty">Комментариев пока нет</p>
+              <p className={styles.commentsEmpty}>Комментариев пока нет</p>
             ) : (
-              <ul className="comments-list">
+              <ul className={styles.commentsList}>
                 {comments.map((comment) => (
-                  <li key={comment.id} className="comment">
-                    <div className="comment__meta">
-                      <span className="comment__author">
+                  <li key={comment.id} className={styles.comment}>
+                    <div className={styles.commentMeta}>
+                      <span className={styles.commentAuthor}>
                         {getUserName(comment.author_id)}
                       </span>
-                      <span className="comment__date">
+                      <span className={styles.commentDate}>
                         {formatDate(comment.created_at, { withTime: true })}
                       </span>
                     </div>
-                    <p className="comment__text">{comment.text}</p>
+                    <p className={styles.commentText}>{comment.text}</p>
                   </li>
                 ))}
               </ul>
             )}
 
-            <form onSubmit={handleAddComment} className="comment-form">
+            <form onSubmit={handleAddComment} className={styles.commentForm}>
               <textarea
-                className="comment-textarea"
+                className={styles.commentTextarea}
                 placeholder="Написать комментарий..."
                 value={commentText}
                 onChange={(e) => setCommentText(e.target.value)}
@@ -209,67 +210,62 @@ function TicketDetailPage() {
           </section>
         </div>
 
-        <aside className="detail-sidebar">
-          <div className="detail-card">
-            <dl className="detail-meta">
-              <div className="detail-meta__row">
+        <aside className={styles.detailSidebar}>
+          <div className={styles.detailCard}>
+            <dl className={styles.detailMeta}>
+              <div className={styles.detailMetaRow}>
                 <dt>Ответственный</dt>
                 <dd>{getUserName(ticket.assignee_id)}</dd>
               </div>
-              <div className="detail-meta__row">
+              <div className={styles.detailMetaRow}>
                 <dt>Статус</dt>
                 <dd>
                   <Badge type="status" value={ticket.status} />
                 </dd>
               </div>
-
-              <div className="detail-meta__row">
+              <div className={styles.detailMetaRow}>
                 <dt>Приоритет</dt>
                 <dd>
                   <Badge type="priority" value={ticket.priority} />
                 </dd>
               </div>
-
-              <div className="detail-meta__row">
+              <div className={styles.detailMetaRow}>
                 <dt>Канал</dt>
                 <dd>{CHANNEL_LABELS[ticket.channel] ?? ticket.channel}</dd>
               </div>
-
-              <div className="detail-meta__row">
+              <div className={styles.detailMetaRow}>
                 <dt>SLA</dt>
-                <dd className={overdue ? 'text-error' : ''}>
+                <dd className={overdue ? styles.textError : ''}>
                   {formatDate(ticket.sla_deadline)}
-                  {overdue && <span className="sla-badge">Просрочено</span>}
+                  {overdue && (
+                    <span className={styles.slaBadge}>Просрочено</span>
+                  )}
                 </dd>
               </div>
-
-              <div className="detail-meta__row">
+              <div className={styles.detailMetaRow}>
                 <dt>Создана</dt>
                 <dd>{formatDate(ticket.created_at)}</dd>
               </div>
-
-              <div className="detail-meta__row">
+              <div className={styles.detailMetaRow}>
                 <dt>Обновлена</dt>
                 <dd>{formatDate(ticket.updated_at)}</dd>
               </div>
             </dl>
           </div>
 
-          <div className="detail-card">
-            <h2 className="detail-card__title">Клиент</h2>
-            <dl className="detail-meta">
-              <div className="detail-meta__row">
+          <div className={styles.detailCard}>
+            <h2 className={styles.detailCardTitle}>Клиент</h2>
+            <dl className={styles.detailMeta}>
+              <div className={styles.detailMetaRow}>
                 <dt>Имя</dt>
                 <dd>{ticket.client.name}</dd>
               </div>
-
-              <div className="detail-meta__row">
+              <div className={styles.detailMetaRow}>
                 <dt>Email</dt>
                 <dd>{ticket.client.email}</dd>
               </div>
-
               {ticket.client.phone && (
-                <div className="detail-meta__row">
+                <div className={styles.detailMetaRow}>
                   <dt>Телефон</dt>
                   <dd>{ticket.client.phone}</dd>
                 </div>

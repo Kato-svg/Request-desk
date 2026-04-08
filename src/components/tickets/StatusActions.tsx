@@ -1,5 +1,6 @@
 import type { Ticket, TicketStatus } from '../../types'
 import Button from '../ui/Button'
+import styles from './StatusActions.module.css'
 
 // Какие переходы разрешены из каждого статуса
 const STATUS_TRANSITIONS: Record<Ticket['status'], Ticket['status'][]> = {
@@ -34,11 +35,13 @@ function StatusActions({
   const transitions = STATUS_TRANSITIONS[currentStatus]
 
   if (transitions.length === 0) {
-    return <p className="status-actions__empty">Изменение статуса недоступно</p>
+    return (
+      <p className={styles.statusActionsEmpty}>Изменение статуса недоступно</p>
+    )
   }
 
   return (
-    <div className="status-actions">
+    <div className={styles.statusActions}>
       {transitions.map((status) => (
         <Button
           key={status}

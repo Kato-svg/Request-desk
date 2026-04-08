@@ -1,0 +1,84 @@
+.tableWrapper {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableTh {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  background-color: var(--color-surface-2);
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+
+.tableRow {
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color var(--transition);
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+}
+
+.tableRowClickable {
+  cursor: pointer;
+}
+
+.tableRowClickable:hover {
+  background-color: var(--color-surface-2);
+}
+
+.tableCell {
+  padding: var(--space-3) var(--space-4);
+  font-size: 0.9375rem;
+  vertical-align: middle;
+}
+
+.tableCellMuted {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+
+.ticketSubject {
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.slaOverdue {
+  color: var(--color-error);
+  font-weight: 500;
+}
+
+.slaOk {
+  color: var(--color-text-muted);
+}
+
+.pageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+}
+
+.pageTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.3;
+}
+
+.pageSubtitle {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-top: var(--space-1);
+}

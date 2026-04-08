@@ -1,0 +1,10 @@
+.statusActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.statusActionsEmpty {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}

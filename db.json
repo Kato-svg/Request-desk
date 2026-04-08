@@ -37,7 +37,7 @@
       },
       "assignee_id": 1,
       "created_at": "2026-03-28T09:15:00.000Z",
-      "updated_at": "2026-04-08T12:25:25.662Z",
+      "updated_at": "2026-04-08T18:27:51.518Z",
       "sla_deadline": "2026-03-29T18:00:00.000Z",
       "client_name": "Иван Морозов",
       "client_email": "morozov@gmail.com",
@@ -418,6 +418,20 @@
       "text": "ву",
       "created_at": "2026-04-07T22:15:46.581Z",
       "id": "OBNEsJ3m_Os"
+    },
+    {
+      "ticket_id": 4,
+      "author_id": 1,
+      "text": "ву",
+      "created_at": "2026-04-08T15:33:11.283Z",
+      "id": "Jnqi02XUhYI"
+    },
+    {
+      "ticket_id": 4,
+      "author_id": 1,
+      "text": "sw",
+      "created_at": "2026-04-08T18:18:06.763Z",
+      "id": "cq5iB2zkgKM"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

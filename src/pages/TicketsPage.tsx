@@ -7,6 +7,8 @@ import { formatDate, isSlaOverdue } from '../utils/formatDate'
 import { useTicketFilters } from '../hooks/useTicketFilters'
 import { filterTickets } from '../utils/filterTickets'
 import TicketFilters from '../components/tickets/TicketFilters'
+import styles from './TicketsPage.module.css'
+import clsx from 'clsx'
 
 function TicketsPage() {
   const { tickets, loading, error } = useTickets()
@@ -15,11 +17,11 @@ function TicketsPage() {
 
   const filteredTickets = filterTickets(tickets, filters)
   return (
-    <div className="tickets-page">
-      <div className="page-header">
+    <div>
+      <div className={styles.pageHeader}>
         <div>
-          <h1 className="page-title">Заявки</h1>
-          <p className="page-subtitle">
+          <h1 className={styles.pageTitle}>Заявки</h1>
+          <p className={styles.pageSubtitle}>
             {!loading && !error && `${tickets.length} заявок`}
           </p>
         </div>
@@ -34,19 +36,19 @@ function TicketsPage() {
         onReset={resetFilters}
       />
 
-      <div className="table-wrapper">
-        <table className="table">
+      <div className={styles.tableWrapper}>
+        <table className={styles.table}>
           <thead>
             <tr>
-              <th className="table-th" style={{ width: 60 }}>
+              <th className={styles.tableTh} style={{ width: 60 }}>
                 #
               </th>
-              <th className="table-th">Тема</th>
-              <th className="table-th">Клиент</th>
-              <th className="table-th">Статус</th>
-              <th className="table-th">Приоритет</th>
-              <th className="table-th">SLA</th>
-              <th className="table-th">Создана</th>
+              <th className={styles.tableTh}>Тема</th>
+              <th className={styles.tableTh}>Клиент</th>
+              <th className={styles.tableTh}>Статус</th>
+              <th className={styles.tableTh}>Приоритет</th>
+              <th className={styles.tableTh}>SLA</th>
+              <th className={styles.tableTh}>Создана</th>
             </tr>
           </thead>
           <tbody>
@@ -88,30 +90,40 @@ function TicketsPage() {
                 return (
                   <tr
                     key={ticket.id}
-                    className="table-row table-row--clickable"
+                    className={clsx(styles.tableRow, styles.tableRowClickable)}
                     onClick={() => navigate(`/tickets/${ticket.id}`)}
                   >
-                    <td className="table-cell table-cell--muted">
+                    <td
+                      className={clsx(styles.tableCell, styles.tableCellMuted)}
+                    >
                       #{ticket.id}
                     </td>
-                    <td className="table-cell">
-                      <span className="ticket-subject">{ticket.subject}</span>
+                    <td className={styles.tableCell}>
+                      <span className={styles.ticketSubject}>
+                        {ticket.subject}
+                      </span>
                     </td>
-                    <td className="table-cell table-cell--muted">
+                    <td
+                      className={clsx(styles.tableCell, styles.tableCellMuted)}
+                    >
                       {ticket.client.name}
                     </td>
-                    <td className="table-cell">
+                    <td className={styles.tableCell}>
                       <Badge type="status" value={ticket.status} />
                     </td>
-                    <td className="table-cell">
+                    <td className={styles.tableCell}>
                       <Badge type="priority" value={ticket.priority} />
                     </td>
-                    <td className="table-cell">
-                      <span className={overdue ? 'sla-overdue' : 'sla-ok'}>
+                    <td className={styles.tableCell}>
+                      <span
+                        className={overdue ? styles.slaOverdue : styles.slaOk}
+                      >
                         {formatDate(ticket.sla_deadline)}
                       </span>
                     </td>
-                    <td className="table-cell table-cell--muted">
+                    <td
+                      className={clsx(styles.tableCell, styles.tableCellMuted)}
+                    >
                       {formatDate(ticket.created_at)}
                     </td>
                   </tr>

@@ -1,0 +1,51 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.badgeStatusNew {
+  background-color: var(--color-status-new-bg);
+  color: var(--color-status-new-text);
+}
+.badgeStatusInProgress {
+  background-color: var(--color-status-in-progress-bg);
+  color: var(--color-status-in-progress-text);
+}
+.badgeStatusWaiting {
+  background-color: var(--color-status-waiting-bg);
+  color: var(--color-status-waiting-text);
+}
+.badgeStatusResolved {
+  background-color: var(--color-status-resolved-bg);
+  color: var(--color-status-resolved-text);
+}
+.badgeStatusClosed {
+  background-color: var(--color-status-closed-bg);
+  color: var(--color-status-closed-text);
+}
+.badgeStatusCancelled {
+  background-color: var(--color-status-cancelled-bg);
+  color: var(--color-status-cancelled-text);
+}
+
+.badgePriorityLow {
+  background-color: var(--color-priority-low-bg);
+  color: var(--color-priority-low-text);
+}
+.badgePriorityMedium {
+  background-color: var(--color-priority-medium-bg);
+  color: var(--color-priority-medium-text);
+}
+.badgePriorityHigh {
+  background-color: var(--color-priority-high-bg);
+  color: var(--color-priority-high-text);
+}
+.badgePriorityCritical {
+  background-color: var(--color-priority-critical-bg);
+  color: var(--color-priority-critical-text);
+}

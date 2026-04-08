@@ -8,14 +8,14 @@ export async function fetchTickets(): Promise<Ticket[]> {
   return res.json()
 }
 
-export async function fetchTicketById(id: number): Promise<Ticket> {
+export async function fetchTicketById(id: string | number): Promise<Ticket> {
   const res = await fetch(`${BASE_URL}/tickets/${id}`)
   if (!res.ok) throw new Error(`Заявка не найдена: ${res.status}`)
   return res.json()
 }
 
 export async function updateTicket(
-  id: number,
+  id: string | number,
   data: Partial<Ticket>
 ): Promise<Ticket> {
   const res = await fetch(`${BASE_URL}/tickets/${id}`, {
@@ -28,7 +28,7 @@ export async function updateTicket(
 }
 
 export async function fetchCommentsByTicketId(
-  ticketId: number
+  ticketId: string | number
 ): Promise<Comment[]> {
   const res = await fetch(`${BASE_URL}/comments?ticket_id=${ticketId}`)
   if (!res.ok) throw new Error(`Ошибка загрузки комментариев: ${res.status}`)

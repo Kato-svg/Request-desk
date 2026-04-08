@@ -30,6 +30,20 @@ const PRIORITY_OPTIONS: Ticket['priority'][] = [
   'critical',
 ]
 
+const PRIORITY_LABELS: Record<Ticket['priority'], string> = {
+  low: 'Низкий',
+  medium: 'Средний',
+  high: 'Высокий',
+  critical: 'Критичный',
+}
+
+const CHANNEL_LABELS: Record<Ticket['channel'], string> = {
+  web: 'Сайт',
+  email: 'Email',
+  phone: 'Телефон',
+  chat: 'Чат',
+}
+
 const CHANNEL_OPTIONS: Ticket['channel'][] = ['web', 'email', 'phone', 'chat']
 
 function validate(form: TicketFormData): FormErrors {
@@ -166,7 +180,7 @@ export default function TicketFrom({
           >
             {PRIORITY_OPTIONS.map((p) => (
               <option key={p} value={p}>
-                {p}
+                {PRIORITY_LABELS[p]}
               </option>
             ))}
           </select>
@@ -185,7 +199,7 @@ export default function TicketFrom({
           >
             {CHANNEL_OPTIONS.map((c) => (
               <option key={c} value={c}>
-                {c}
+                {CHANNEL_LABELS[c]}
               </option>
             ))}
           </select>

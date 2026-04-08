@@ -25,7 +25,7 @@
   "tickets": [
     {
       "id": "1",
-      "subject": "Не работает оплата картой на сайте",
+      "subject": "Не работает оплата",
       "description": "При попытке оплатить заказ картой Visa страница зависает на шаге подтверждения. Проблема воспроизводится в Chrome и Safari. Попробовал другую карту — та же ситуация.",
       "status": "closed",
       "priority": "low",
@@ -37,7 +37,7 @@
       },
       "assignee_id": 1,
       "created_at": "2026-03-28T09:15:00.000Z",
-      "updated_at": "2026-04-08T18:27:51.518Z",
+      "updated_at": "2026-04-08T19:47:38.877Z",
       "sla_deadline": "2026-03-29T18:00:00.000Z",
       "client_name": "Иван Морозов",
       "client_email": "morozov@gmail.com",
@@ -96,7 +96,7 @@
       "id": "5",
       "subject": "Задвоение позиций в корзине",
       "description": "При добавлении товара в корзину он иногда добавляется дважды. Воспроизводится непостоянно, примерно 1 раз из 5. Браузер Firefox 122.",
-      "status": "resolved",
+      "status": "waiting",
       "priority": "high",
       "channel": "web",
       "client": {
@@ -106,7 +106,7 @@
       },
       "assignee_id": 2,
       "created_at": "2026-04-01T08:20:00.000Z",
-      "updated_at": "2026-04-07T16:16:32.574Z",
+      "updated_at": "2026-04-08T20:56:24.487Z",
       "sla_deadline": "2026-04-04T18:00:00.000Z"
     },
     {
@@ -127,9 +127,9 @@
     },
     {
       "id": "7",
-      "subject": "Возврат товара: не получил деньги за 14 дней",
+      "subject": "Возврат товара: не получил деньги за 14 дней (отредактировано)",
       "description": "Отправил товар на возврат 18 марта, получили 20 марта (есть трек-номер). По закону деньги должны вернуть в течение 10 дней. Сегодня 2 апреля — денег нет.",
-      "status": "in_progress",
+      "status": "resolved",
       "priority": "critical",
       "channel": "phone",
       "client": {
@@ -139,8 +139,11 @@
       },
       "assignee_id": 3,
       "created_at": "2026-04-02T09:00:00.000Z",
-      "updated_at": "2026-04-02T09:00:00.000Z",
-      "sla_deadline": "2026-04-02T18:00:00.000Z"
+      "updated_at": "2026-04-08T19:52:59.408Z",
+      "sla_deadline": "2026-04-02T18:00:00.000Z",
+      "client_name": "Виктор Козлов",
+      "client_email": "kozlov.v@mail.ru",
+      "client_phone": "+79031234567"
     },
     {
       "id": "8",
@@ -221,68 +224,8 @@
       },
       "assignee_id": 1,
       "created_at": "2026-04-02T15:00:00.000Z",
-      "updated_at": "2026-04-02T15:30:00.000Z",
+      "updated_at": "2026-04-08T20:54:31.499Z",
       "sla_deadline": "2026-04-03T10:00:00.000Z"
-    },
-    {
-      "subject": "Пробная заявка ",
-      "description": "Пробная заявка для проверки функционала ",
-      "priority": "critical",
-      "channel": "web",
-      "assignee_id": 1,
-      "client_name": "Иван Морозов",
-      "client_email": "morozov@gmail.com",
-      "client_phone": "",
-      "status": "new",
-      "client": {
-        "name": "Иван Морозов",
-        "email": "morozov@gmail.com",
-        "phone": ""
-      },
-      "created_at": "2026-04-08T12:31:10.600Z",
-      "updated_at": "2026-04-08T12:31:10.600Z",
-      "sla_deadline": "2026-04-11T12:31:10.600Z",
-      "id": "5jeRaUhdm-s"
-    },
-    {
-      "subject": "ж",
-      "description": " ",
-      "priority": "medium",
-      "channel": "web",
-      "assignee_id": 1,
-      "client_name": "",
-      "client_email": "",
-      "client_phone": "",
-      "status": "new",
-      "client": {
-        "name": "",
-        "email": "",
-        "phone": ""
-      },
-      "created_at": "2026-04-08T14:54:15.128Z",
-      "updated_at": "2026-04-08T14:54:15.128Z",
-      "sla_deadline": "2026-04-11T14:54:15.128Z",
-      "id": "8LeEo6a8hEQ"
-    },
-    {
-      "subject": " ",
-      "description": " ",
-      "priority": "medium",
-      "channel": "web",
-      "assignee_id": 1,
-      "client_name": "",
-      "client_email": "",
-      "client_phone": "",
-      "status": "new",
-      "client": {
-        "name": "",
-        "email": "",
-        "phone": ""
-      },
-      "created_at": "2026-04-08T14:54:20.019Z",
-      "updated_at": "2026-04-08T14:54:20.019Z",
-      "sla_deadline": "2026-04-11T14:54:20.019Z",
-      "id": "n6Pw9KebBPM"
     }
   ],
   "comments": [
@@ -315,123 +258,18 @@
       "created_at": "2026-04-02T15:30:00.000Z"
     },
     {
-      "ticket_id": 1,
+      "ticket_id": "12",
       "author_id": 1,
-      "text": "вывы",
-      "created_at": "2026-04-05T14:27:39.366Z",
-      "id": "PDZXS7k_su0"
+      "text": "Повторный тест комментария — проверка работы",
+      "created_at": "2026-04-08T20:49:48.921Z",
+      "id": "UsNwhbpmZlM"
     },
     {
-      "ticket_id": 1,
+      "ticket_id": "1",
       "author_id": 1,
-      "text": "у",
-      "created_at": "2026-04-05T14:30:13.977Z",
-      "id": "ypTAuaq4deI"
-    },
-    {
-      "ticket_id": 3,
-      "author_id": 1,
-      "text": "в работе",
-      "created_at": "2026-04-05T15:54:52.660Z",
-      "id": "iWzAwM0EEz8"
-    },
-    {
-      "ticket_id": 2,
-      "author_id": 1,
-      "text": "d",
-      "created_at": "2026-04-07T13:20:47.183Z",
-      "id": "J7vDUyb4wxw"
-    },
-    {
-      "ticket_id": 2,
-      "author_id": 1,
-      "text": "ву",
-      "created_at": "2026-04-07T14:16:36.700Z",
-      "id": "s62RhtTaOZo"
-    },
-    {
-      "ticket_id": 1,
-      "author_id": 1,
-      "text": "ED",
-      "created_at": "2026-04-07T15:07:55.196Z",
-      "id": "4lUWpQ-ti10"
-    },
-    {
-      "ticket_id": 2,
-      "author_id": 1,
-      "text": "я",
-      "created_at": "2026-04-07T15:17:14.601Z",
-      "id": "YWfI4goJz80"
-    },
-    {
-      "ticket_id": 2,
-      "author_id": 1,
-      "text": "ыцыцыц",
-      "created_at": "2026-04-07T15:33:23.707Z",
-      "id": "9xay_jzkgf8"
-    },
-    {
-      "ticket_id": 2,
-      "author_id": 1,
-      "text": "d",
-      "created_at": "2026-04-07T15:39:59.548Z",
-      "id": "SnVzoPUYPfo"
-    },
-    {
-      "ticket_id": 2,
-      "author_id": 1,
-      "text": "\"\"",
-      "created_at": "2026-04-07T15:40:25.858Z",
-      "id": "FwcJ_Sp_bto"
-    },
-    {
-      "ticket_id": 2,
-      "author_id": 1,
-      "text": "\"     \"",
-      "created_at": "2026-04-07T15:40:31.939Z",
-      "id": "o540ievQpFk"
-    },
-    {
-      "ticket_id": 2,
-      "author_id": 1,
-      "text": "Э",
-      "created_at": "2026-04-07T15:42:01.832Z",
-      "id": "askESDKYIME"
-    },
-    {
-      "ticket_id": 2,
-      "author_id": 1,
-      "text": "\"               \"",
-      "created_at": "2026-04-07T15:43:25.735Z",
-      "id": "U68lnwRNPNY"
-    },
-    {
-      "ticket_id": 8,
-      "author_id": 1,
-      "text": "ч",
-      "created_at": "2026-04-07T16:24:33.321Z",
-      "id": "U5L2HLe-g40"
-    },
-    {
-      "ticket_id": 1,
-      "author_id": 1,
-      "text": "ву",
-      "created_at": "2026-04-07T22:15:46.581Z",
-      "id": "OBNEsJ3m_Os"
-    },
-    {
-      "ticket_id": 4,
-      "author_id": 1,
-      "text": "ву",
-      "created_at": "2026-04-08T15:33:11.283Z",
-      "id": "Jnqi02XUhYI"
-    },
-    {
-      "ticket_id": 4,
-      "author_id": 1,
-      "text": "sw",
-      "created_at": "2026-04-08T18:18:06.763Z",
-      "id": "cq5iB2zkgKM"
+      "text": "Тестовый комментарий к тикету #1",
+      "created_at": "2026-04-08T20:54:12.329Z",
+      "id": "cEOzQ4PmOZM"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

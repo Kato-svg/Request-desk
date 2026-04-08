@@ -207,3 +207,13 @@
   border-radius: var(--radius-full);
   margin-left: var(--space-1);
 }
+
+@media (max-width: 768px) {
+  .detailGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .detailSidebar {
+    order: -1; /* Сайдбар уходит наверх — статус и клиент важнее описания */
+  }
+}

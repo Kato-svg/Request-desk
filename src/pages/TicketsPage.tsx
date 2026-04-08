@@ -16,13 +16,14 @@ function TicketsPage() {
   const navigate = useNavigate()
 
   const filteredTickets = filterTickets(tickets, filters)
+
   return (
     <div>
       <div className={styles.pageHeader}>
         <div>
           <h1 className={styles.pageTitle}>Заявки</h1>
           <p className={styles.pageSubtitle}>
-            {!loading && !error && `${tickets.length} заявок`}
+            {!loading && !error && `${filteredTickets.length} заявок`}
           </p>
         </div>
         <Button variant="primary" onClick={() => navigate('/tickets/new')}>
@@ -40,11 +41,11 @@ function TicketsPage() {
         <table className={styles.table}>
           <thead>
             <tr>
-              <th className={styles.tableTh} style={{ width: 60 }}>
-                #
-              </th>
+              <th className={`${styles.tableTh} ${styles.colId}`}>#</th>
               <th className={styles.tableTh}>Тема</th>
-              <th className={styles.tableTh}>Клиент</th>
+              <th className={`${styles.tableTh} ${styles.colClient}`}>
+                Клиент
+              </th>
               <th className={styles.tableTh}>Статус</th>
               <th className={styles.tableTh}>Приоритет</th>
               <th className={styles.tableTh}>SLA</th>
@@ -86,7 +87,6 @@ function TicketsPage() {
               !error &&
               filteredTickets.map((ticket) => {
                 const overdue = isSlaOverdue(ticket.sla_deadline)
-
                 return (
                   <tr
                     key={ticket.id}
@@ -94,7 +94,11 @@ function TicketsPage() {
                     onClick={() => navigate(`/tickets/${ticket.id}`)}
                   >
                     <td
-                      className={clsx(styles.tableCell, styles.tableCellMuted)}
+                      className={clsx(
+                        styles.tableCell,
+                        styles.tableCellMuted,
+                        styles.colId
+                      )}
                     >
                       #{ticket.id}
                     </td>
@@ -104,7 +108,11 @@ function TicketsPage() {
                       </span>
                     </td>
                     <td
-                      className={clsx(styles.tableCell, styles.tableCellMuted)}
+                      className={clsx(
+                        styles.tableCell,
+                        styles.tableCellMuted,
+                        styles.colClient
+                      )}
                     >
                       {ticket.client.name}
                     </td>

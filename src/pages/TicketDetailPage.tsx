@@ -23,9 +23,7 @@ function TicketDetailPage() {
   const navigate = useNavigate()
   const { currentUser } = useAuth()
 
-  const parsedTicketId = id ? Number(id) : null
-  const isInvalidTicketId =
-    parsedTicketId === null || Number.isNaN(parsedTicketId)
+  const isInvalidTicketId = !id || id.trim() === ''
 
   const [commentText, setCommentText] = useState('')
   const [commentLoading, setCommentLoading] = useState(false)
@@ -34,7 +32,7 @@ function TicketDetailPage() {
   const [commentError, setCommentError] = useState<string | null>(null)
 
   const { ticket, comments, loading, error, changeStatus, addComment } =
-    useTicketDetail(parsedTicketId ?? 0)
+    useTicketDetail(isInvalidTicketId ? null : id)
 
   if (isInvalidTicketId) {
     return (

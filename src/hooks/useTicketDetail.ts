@@ -16,7 +16,9 @@ type UseTicketDetailResult = {
   addComment: (text: string, authorId: number) => Promise<void>
 }
 
-export function useTicketDetail(id: number | null): UseTicketDetailResult {
+export function useTicketDetail(
+  id: string | number | null
+): UseTicketDetailResult {
   const [ticket, setTicket] = useState<Ticket | null>(null)
   const [comments, setComments] = useState<Comment[]>([])
   const [loading, setLoading] = useState(true)

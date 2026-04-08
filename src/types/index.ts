@@ -17,7 +17,7 @@ export type Client = {
 }
 
 export type Ticket = {
-  id: number
+  id: string | number
   subject: string
   description: string
   status: TicketStatus
@@ -31,8 +31,8 @@ export type Ticket = {
 }
 
 export type Comment = {
-  id: number
-  ticket_id: number
+  id: string | number
+  ticket_id: string | number
   author_id: number
   text: string
   created_at: string

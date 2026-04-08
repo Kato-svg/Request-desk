@@ -10,10 +10,11 @@ type Props = {
 const STATUS_OPTIONS = [
   { value: '', label: 'Все статусы' },
   { value: 'new', label: 'Новая' },
-  { value: 'open', label: 'Открытая' },
-  { value: 'pending', label: 'В ожидании' },
+  { value: 'in_progress', label: 'В работе' },
+  { value: 'waiting', label: 'В ожидании' },
   { value: 'resolved', label: 'Решена' },
   { value: 'closed', label: 'Закрыта' },
+  { value: 'cancelled', label: 'Отменена' },
 ]
 
 const PRIORITY_OPTIONS = [

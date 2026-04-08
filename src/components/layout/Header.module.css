@@ -40,3 +40,13 @@
   font-size: 0.875rem;
   color: var(--color-text-muted);
 }
+
+@media (max-width: 640px) {
+  .headerInner {
+    padding: 0 var(--space-4);
+  }
+
+  .headerUser {
+    display: none; /* имя скрываем — на мобильном не нужно */
+  }
+}

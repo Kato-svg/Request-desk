@@ -26,6 +26,15 @@ function TicketDetailPage() {
   const isInvalidTicketId =
     parsedTicketId === null || Number.isNaN(parsedTicketId)
 
+  const [commentText, setCommentText] = useState('')
+  const [commentLoading, setCommentLoading] = useState(false)
+  const [statusLoading, setStatusLoading] = useState(false)
+  const [statusError, setStatusError] = useState<string | null>(null)
+  const [commentError, setCommentError] = useState<string | null>(null)
+
+  const { ticket, comments, loading, error, changeStatus, addComment } =
+    useTicketDetail(parsedTicketId ?? 0)
+
   if (isInvalidTicketId) {
     return (
       <div className="error-state">
@@ -34,15 +43,6 @@ function TicketDetailPage() {
       </div>
     )
   }
-
-  const { ticket, comments, loading, error, changeStatus, addComment } =
-    useTicketDetail(parsedTicketId)
-
-  const [commentText, setCommentText] = useState('')
-  const [commentLoading, setCommentLoading] = useState(false)
-  const [statusLoading, setStatusLoading] = useState(false)
-  const [statusError, setStatusError] = useState<string | null>(null)
-  const [commentError, setCommentError] = useState<string | null>(null)
 
   async function handleAddComment(e: React.FormEvent) {
     e.preventDefault()
@@ -119,14 +119,10 @@ function TicketDetailPage() {
 
   const overdue = isSlaOverdue(ticket.sla_deadline)
 
-  function getUserName(userId: number) {
-    const user = MOCK_USERS.find((u) => u.id === userId)
-    return user ? user.name : `Сотрудник #${userId}`
-  }
-
-  function getAssigneeName(userId: number) {
-    const user = MOCK_USERS.find((u) => u.id === userId)
-    return user ? user.name : 'Не назначен'
+  function getUserName(userId: number): string {
+    return (
+      MOCK_USERS.find((u) => u.id === userId)?.name ?? `Сотрудник #${userId}`
+    )
   }
 
   return (
@@ -218,7 +214,7 @@ function TicketDetailPage() {
             <dl className="detail-meta">
               <div className="detail-meta__row">
                 <dt>Ответственный</dt>
-                <dd>{getAssigneeName(ticket.assignee_id)}</dd>
+                <dd>{getUserName(ticket.assignee_id)}</dd>
               </div>
               <div className="detail-meta__row">
                 <dt>Статус</dt>

@@ -28,8 +28,8 @@
       "subject": "Не работает оплата картой на сайте",
       "description": "При попытке оплатить заказ картой Visa страница зависает на шаге подтверждения. Проблема воспроизводится в Chrome и Safari. Попробовал другую карту — та же ситуация.",
       "status": "closed",
-      "priority": "critical",
-      "channel": "web",
+      "priority": "low",
+      "channel": "email",
       "client": {
         "name": "Иван Морозов",
         "email": "morozov@gmail.com",
@@ -37,8 +37,11 @@
       },
       "assignee_id": 1,
       "created_at": "2026-03-28T09:15:00.000Z",
-      "updated_at": "2026-04-05T14:26:53.365Z",
-      "sla_deadline": "2026-03-29T18:00:00.000Z"
+      "updated_at": "2026-04-08T12:25:25.662Z",
+      "sla_deadline": "2026-03-29T18:00:00.000Z",
+      "client_name": "Иван Морозов",
+      "client_email": "morozov@gmail.com",
+      "client_phone": "+79001234567"
     },
     {
       "id": "2",
@@ -220,6 +223,26 @@
       "created_at": "2026-04-02T15:00:00.000Z",
       "updated_at": "2026-04-02T15:30:00.000Z",
       "sla_deadline": "2026-04-03T10:00:00.000Z"
+    },
+    {
+      "subject": "Пробная заявка ",
+      "description": "Пробная заявка для проверки функционала ",
+      "priority": "critical",
+      "channel": "web",
+      "assignee_id": 1,
+      "client_name": "Иван Морозов",
+      "client_email": "morozov@gmail.com",
+      "client_phone": "",
+      "status": "new",
+      "client": {
+        "name": "Иван Морозов",
+        "email": "morozov@gmail.com",
+        "phone": ""
+      },
+      "created_at": "2026-04-08T12:31:10.600Z",
+      "updated_at": "2026-04-08T12:31:10.600Z",
+      "sla_deadline": "2026-04-11T12:31:10.600Z",
+      "id": "5jeRaUhdm-s"
     }
   ],
   "comments": [
@@ -348,6 +371,13 @@
       "text": "ч",
       "created_at": "2026-04-07T16:24:33.321Z",
       "id": "U5L2HLe-g40"
+    },
+    {
+      "ticket_id": 1,
+      "author_id": 1,
+      "text": "ву",
+      "created_at": "2026-04-07T22:15:46.581Z",
+      "id": "OBNEsJ3m_Os"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

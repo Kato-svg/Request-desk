@@ -46,3 +46,23 @@ export async function createComment(
   if (!res.ok) throw new Error(`Ошибка создания комментария: ${res.status}`)
   return res.json()
 }
+
+export async function createTicket(
+  data: Omit<Ticket, 'id' | 'created_at' | 'updated_at'>
+): Promise<Ticket> {
+  const res = await fetch(`${BASE_URL}/tickets`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      ...data,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    }),
+  })
+
+  if (!res.ok) {
+    throw new Error(`Ошибка создания заявки: ${res.status}`)
+  }
+
+  return res.json()
+}

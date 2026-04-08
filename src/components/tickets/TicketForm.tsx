@@ -14,6 +14,8 @@ export type TicketFormData = {
   client_phone: string
 }
 
+type FormErrors = Partial<Record<keyof TicketFormData, string>>
+
 type Props = {
   initialData?: Partial<TicketFormData> // при редактировании
   onSubmit: (data: TicketFormData) => Promise<void>
@@ -29,6 +31,32 @@ const PRIORITY_OPTIONS: Ticket['priority'][] = [
 ]
 
 const CHANNEL_OPTIONS: Ticket['channel'][] = ['web', 'email', 'phone', 'chat']
+
+function validate(form: TicketFormData): FormErrors {
+  const errors: FormErrors = {}
+
+  if (!form.subject.trim()) {
+    errors.subject = 'Укажите тему заявки'
+  } else if (form.subject.trim().length < 5) {
+    errors.subject = 'Тема должна быть не менее 5 символов'
+  }
+
+  if (!form.description.trim()) {
+    errors.description = 'Добавьте описание проблемы'
+  }
+
+  if (!form.client_name.trim()) {
+    errors.client_name = 'Укажите имя клиента'
+  }
+
+  if (!form.client_email.trim()) {
+    errors.client_email = 'Укажите email клиента'
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.client_email)) {
+    errors.client_email = 'Некорректный email'
+  }
+
+  return errors
+}
 
 export default function TicketFrom({
   initialData,
@@ -47,6 +75,10 @@ export default function TicketFrom({
     client_phone: '',
   })
 
+  const [errors, setErrors] = useState<FormErrors>({})
+
+  const [submitted, setSubmitted] = useState(false)
+
   useEffect(() => {
     if (initialData) {
       setForm((prev) => ({ ...prev, ...initialData }))
@@ -60,10 +92,26 @@ export default function TicketFrom({
   ) {
     const { name, value } = e.target
     setForm((prev) => ({ ...prev, [name]: value }))
+
+    if (submitted) {
+      const updated = { ...form, [name]: value }
+      const newErrors = validate(updated)
+      setErrors(newErrors)
+    }
   }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    setSubmitted(true)
+
+    const validationErrors = validate(form)
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors)
+      return
+    }
+
+    setErrors({})
     await onSubmit(form)
   }
 
@@ -74,14 +122,16 @@ export default function TicketFrom({
           Тема
         </label>
         <input
-          className={styles.input}
+          className={`${styles.input} ${errors.subject ? styles.inputError : ''}`}
           id="subject"
           name="subject"
           value={form.subject}
           onChange={handleChange}
-          required
           disabled={isLoading}
         />
+        {errors.subject && (
+          <span className={styles.errorText}>{errors.subject}</span>
+        )}
       </div>
 
       <div className={styles.group}>
@@ -89,15 +139,17 @@ export default function TicketFrom({
           Описание
         </label>
         <textarea
-          className={styles.textarea}
+          className={`${styles.input} ${errors.subject ? styles.inputError : ''}`}
           id="description"
           name="description"
           value={form.description}
           onChange={handleChange}
           rows={4}
-          required
           disabled={isLoading}
         />
+        {errors.description && (
+          <span className={styles.errorText}>{errors.description}</span>
+        )}
       </div>
 
       <div className={styles.row}>
@@ -147,25 +199,31 @@ export default function TicketFrom({
             Имя
           </label>
           <input
-            className={styles.input}
+            className={`${styles.input} ${errors.subject ? styles.inputError : ''}`}
             id="client_name"
             name="client_name"
             value={form.client_name}
             onChange={handleChange}
           />
+          {errors.client_name && (
+            <span className={styles.errorText}>{errors.client_name}</span>
+          )}
         </div>
         <div className={styles.group}>
           <label htmlFor="client_email" className={styles.label}>
             Email
           </label>
           <input
-            className={styles.input}
+            className={`${styles.input} ${errors.subject ? styles.inputError : ''}`}
             id="client_email"
             name="client_email"
             type="email"
             value={form.client_email}
             onChange={handleChange}
           />
+          {errors.client_email && (
+            <span className={styles.errorText}>{errors.client_email}</span>
+          )}
         </div>
       </fieldset>
 

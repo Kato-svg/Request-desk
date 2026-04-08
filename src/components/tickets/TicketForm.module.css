@@ -81,3 +81,18 @@
   margin-bottom: 1.75rem;
   color: #111827;
 }
+
+.inputError {
+  border-color: #dc2626;
+}
+
+.inputError:focus {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+}
+
+.errorText {
+  font-size: 0.8125rem;
+  color: #dc2626;
+  margin-top: 0.25rem;
+}

@@ -4,11 +4,16 @@ import Badge from '../components/ui/Badge'
 import Button from '../components/ui/Button'
 import TableSkeleton from '../components/ui/TableSkeleton'
 import { formatDate, isSlaOverdue } from '../utils/formatDate'
+import { useTicketFilters } from '../hooks/useTicketFilters'
+import { filterTickets } from '../utils/filterTickets'
+import TicketFilters from '../components/tickets/TicketFilters'
 
 function TicketsPage() {
   const { tickets, loading, error } = useTickets()
+  const { filters, setFilter, resetFilters } = useTicketFilters()
   const navigate = useNavigate()
 
+  const filteredTickets = filterTickets(tickets, filters)
   return (
     <div className="tickets-page">
       <div className="page-header">
@@ -22,6 +27,12 @@ function TicketsPage() {
           + Новая заявка
         </Button>
       </div>
+
+      <TicketFilters
+        filters={filters}
+        onChange={setFilter}
+        onReset={resetFilters}
+      />
 
       <div className="table-wrapper">
         <table className="table">
@@ -71,7 +82,7 @@ function TicketsPage() {
 
             {!loading &&
               !error &&
-              tickets.map((ticket) => {
+              filteredTickets.map((ticket) => {
                 const overdue = isSlaOverdue(ticket.sla_deadline)
 
                 return (

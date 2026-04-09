@@ -84,11 +84,10 @@
 }
 
 @media (max-width: 640px) {
-  .colId {
-    display: none;
-  }
-
-  .colClient {
+  .colId,
+  .colPriority,
+  .colSla,
+  .colCreated {
     display: none;
   }
 }

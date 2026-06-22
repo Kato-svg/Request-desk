@@ -3,6 +3,9 @@
 Веб-приложение для управления заявками технической поддержки.  
 Менеджеры принимают заявки от клиентов, отслеживают статусы, соблюдают SLA-дедлайны и общаются через комментарии.
 
+## 🔗 Live Demo
+**[Посмотреть работающее приложение (Vercel)](https://request-desk.vercel.app/)**
+
 ![Hero](docs/screenshots/hero.png)
 
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=white)
